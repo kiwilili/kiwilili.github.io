@@ -2,7 +2,7 @@
 
 //Variables to change in your deployment
 const deploymentId = 'b9c07add-2ac6-45f5-8be8-bf608e215f3f' //Your WebMessenger DeploymentId
-const hexColor = '#000000' //Color theme
+const hexColor = '#0D6EFD' //Color theme
 
 function toggleMessenger() {
   Genesys(
