@@ -5,6 +5,21 @@ const deploymentId = 'b9c07add-2ac6-45f5-8be8-bf608e215f3f' //Your WebMessenger 
 const hexColor = '#0D6EFD' //Color theme
 
 function toggleMessenger() {
+  const customAttributes = {
+    FirstName: document.getElementById('fname').value,
+    LastName: document.getElementById('lname').value,
+    PhoneNumber: document.getElementById('phonenumber').value,
+    Country: document.getElementById('country').value,
+    Language: document.getElementById('language').value,
+    EmailAddress: document.getElementById('email').value,
+    ProblemCategory1: document.getElementById('problemCategory1').value,
+    ProblemCategory2: document.getElementById('problemCategory2').value,
+    SerialNumber: document.getElementById('serialNumber').value,
+    Device: document.getElementById('device').value,
+    DeviceOwner: document.getElementById('deviceOwner').value,
+    DeviceOwnerNumber: document.getElementById('deviceOwnerNumber').value,
+  }
+  console.log(formData);
   Genesys(
     'command',
     'Messenger.open',
@@ -13,13 +28,7 @@ function toggleMessenger() {
       closeLauncher()
       Genesys('command', 'Database.set', {
         messaging: {
-          customAttributes: {
-            firstName: document.getElementById('fname').value,
-            lastName: document.getElementById('lname').value,
-            email: document.getElementById('email').value,
-            case: document.getElementById('case').value,
-            queueName: document.getElementById('queue').value,
-          },
+          customAttributes,
         },
       })
     },
@@ -79,24 +88,55 @@ document.body.appendChild(launcher)
 
 //Create Input Form
 let input = document.createElement('div')
+
 let header = document.createElement('div')
 let title = document.createElement('p')
 let minButton = document.createElement('button')
 
+let content = document.createElement('div')
+
 let form = document.createElement('div')
 let fnameL = document.createElement('label')
 let fnameI = document.createElement('input')
+
 let lnameL = document.createElement('label')
 let lnameI = document.createElement('input')
+
+let phonenumberL = document.createElement('label')
+let phonenumberI = document.createElement('input')
+
+let countryL = document.createElement('label')
+let countryI = document.createElement('input')
+
+let languageL = document.createElement('label')
+let languageI = document.createElement('input')
+
 let emailL = document.createElement('label')
 let emailI = document.createElement('input')
-let caseL = document.createElement('label')
-let caseI = document.createElement('input')
-let queueL = document.createElement('label')
-let queueS = document.createElement('select')
-let option1 = document.createElement('option')
-let option2 = document.createElement('option')
-let option3 = document.createElement('option')
+
+let problemCategory1L = document.createElement('label')
+let problemCategory1S = document.createElement('select')
+let option11 = document.createElement('option')
+let option12 = document.createElement('option')
+let option13 = document.createElement('option')
+
+let problemCategory2L = document.createElement('label')
+let problemCategory2S = document.createElement('select')
+let option21 = document.createElement('option')
+let option22 = document.createElement('option')
+
+let serialNumberL = document.createElement('label')
+let serialNumberI = document.createElement('input')
+
+let deviceL = document.createElement('label')
+let deviceI = document.createElement('input')
+
+let deviceOwnerL = document.createElement('label')
+let deviceOwnerI = document.createElement('input')
+
+let deviceOwnerNumberL = document.createElement('label')
+let deviceOwnerNumberI = document.createElement('input')
+
 let submit = document.createElement('button')
 
 input.id = 'input'
@@ -142,43 +182,92 @@ header.appendChild(title)
 header.appendChild(minButton)
 input.appendChild(header)
 
+content.style = `height: 580px; width: 100%; overflow-y: scroll;`
+
 form.style = `padding: 25px;`
+const styleItemLabel = `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'sans-serif';`
+const styleItemInput =  `      width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;`
+
 fnameL.innerText = 'First Name'
-fnameL.style = `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'sans-serif';`
+fnameL.style = styleItemLabel
 fnameI.id = 'fname'
-fnameI.style = `      width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;`
+fnameI.style = styleItemInput
 fnameI.placeholder = 'Your first name..'
+
 lnameL.innerText = 'Last Name'
-lnameL.style = `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'sans-serif';`
+lnameL.style = styleItemLabel
 lnameI.id = 'lname'
-lnameI.style = `      width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;`
+lnameI.style = styleItemInput
 lnameI.placeholder = 'Your last name..'
-emailL.innerText = 'Email'
-emailL.style = `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'sans-serif';`
+
+phonenumberL.innerText = 'Phone Number'
+phonenumberL.style = styleItemLabel
+phonenumberI.id = 'phonenumber'
+phonenumberI.style = styleItemInput
+phonenumberI.placeholder = 'Your phone number..'
+
+countryL.innerText = 'Country'
+countryL.style = styleItemLabel
+countryI.id = 'country'
+countryI.style = styleItemInput
+countryI.placeholder = 'Your country..'
+
+languageL.innerText = 'Language'
+languageL.style = styleItemLabel
+languageI.id = 'language'
+languageI.style = styleItemInput
+languageI.placeholder = 'Your language..'
+
+emailL.innerText = 'Email Address'
+emailL.style = styleItemLabel
 emailI.id = 'email'
-emailI.style = `      width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;`
+emailI.style = styleItemInput
 emailI.placeholder = 'Your email address..'
-caseL.innerText = 'Case'
-caseL.style = `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'sans-serif';`
-caseI.id = 'case'
-caseI.style = `      width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;`
-caseI.placeholder = 'Optional case number..'
-queueL.innerText = 'Queue'
-queueL.style = `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', 'sans-serif';`
-queueS.id = 'queue'
-queueS.style = `    width: 100%;
-padding: 12px 20px;
-margin: 8px 0;
-display: inline-block;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box;`
-option1.value = 'sales'
-option1.innerText = 'Sales'
-option2.value = 'support'
-option2.innerText = 'Support'
-option3.value = 'general'
-option3.innerText = 'General'
+
+problemCategory1L.innerText = 'Problem Category1'
+problemCategory1L.style = styleItemLabel
+problemCategory1S.id = 'problemCategory1'
+problemCategory1S.style = styleItemInput
+option11.value = 'device'
+option11.innerText = 'Device'
+option12.value = 'network'
+option12.innerText = 'Network'
+option13.value = 'system'
+option13.innerText = 'System'
+
+problemCategory2L.innerText = 'Problem Category2'
+problemCategory2L.style = styleItemLabel
+problemCategory2S.id = 'problemCategory2'
+problemCategory2S.style = styleItemInput
+option21.value = 'voice'
+option21.innerText = 'Voice'
+option22.value = 'screen'
+option22.innerText = 'Screen'
+
+serialNumberL.innerText = 'Serial Number'
+serialNumberL.style = styleItemLabel
+serialNumberI.id = 'serialNumber'
+serialNumberI.style = styleItemInput
+serialNumberI.placeholder = 'Your serial number..'
+
+deviceL.innerText = 'Device'
+deviceL.style = styleItemLabel
+deviceI.id = 'device'
+deviceI.style = styleItemInput
+deviceI.placeholder = 'Your device..'
+
+deviceOwnerL.innerText = 'Device Owner'
+deviceOwnerL.style = styleItemLabel
+deviceOwnerI.id = 'deviceOwner'
+deviceOwnerI.style = styleItemInput
+deviceOwnerI.placeholder = 'Your device owner..'
+
+deviceOwnerNumberL.innerText = 'Device Owner Number'
+deviceOwnerNumberL.style = styleItemLabel
+deviceOwnerNumberI.id = 'deviceOwnerNumber'
+deviceOwnerNumberI.style = styleItemInput
+deviceOwnerNumberI.placeholder = 'Your device owner number..'
+
 submit.style = `width: 100%;
 background-color: ${hexColor};
 color: white;
@@ -192,21 +281,53 @@ submit.onclick = function () {
   toggleMessenger()
 }
 
-queueS.appendChild(option1)
-queueS.appendChild(option2)
-queueS.appendChild(option3)
+problemCategory1S.appendChild(option11)
+problemCategory1S.appendChild(option12)
+problemCategory1S.appendChild(option13)
+
+problemCategory2S.appendChild(option21)
+problemCategory2S.appendChild(option22)
+
 form.appendChild(fnameL)
 form.appendChild(fnameI)
+
 form.appendChild(lnameL)
 form.appendChild(lnameI)
+
+form.appendChild(phonenumberL)
+form.appendChild(phonenumberI)
+
+form.appendChild(countryL)
+form.appendChild(countryI)
+
+form.appendChild(languageL)
+form.appendChild(languageI)
+
 form.appendChild(emailL)
 form.appendChild(emailI)
-form.appendChild(caseL)
-form.appendChild(caseI)
-form.appendChild(queueL)
-form.appendChild(queueS)
+
+
+form.appendChild(problemCategory1L)
+form.appendChild(problemCategory1S)
+
+form.appendChild(problemCategory2L)
+form.appendChild(problemCategory2S)
+
+form.appendChild(serialNumberL)
+form.appendChild(serialNumberI)
+
+form.appendChild(deviceL)
+form.appendChild(deviceI)
+
+form.appendChild(deviceOwnerL)
+form.appendChild(deviceOwnerI)
+
+form.appendChild(deviceOwnerNumberL)
+form.appendChild(deviceOwnerNumberI)
+
 form.appendChild(submit)
-input.appendChild(form)
+content.appendChild(form)
+input.appendChild(content)
 
 document.body.appendChild(input)
 
