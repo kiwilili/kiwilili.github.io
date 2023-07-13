@@ -19,7 +19,6 @@ function toggleMessenger() {
     DeviceOwner: document.getElementById('deviceOwner').value,
     DeviceOwnerNumber: document.getElementById('deviceOwnerNumber').value,
   }
-  console.log(formData);
   Genesys(
     'command',
     'Messenger.open',
