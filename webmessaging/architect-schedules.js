@@ -1,5 +1,6 @@
-const rrulestr = rrule.rrulestr;
-const platformClient = require("platformClient");
+const rrulestr = require('rrule').rrulestr;
+const moment = require('moment');
+const platformClient = require('purecloud-platform-client-v2');
 const client = platformClient.ApiClient.instance;
 
 function isCurrentlyInSchedule(schedule) {
@@ -67,6 +68,10 @@ function evaluateScheduleGroup(scheduleGroup) {
 }
 
 
+const GENESYS_CLOUD_CLIENT_ID = 'a35e979e-ca57-4818-86f0-782500ae95ef'
+const GENESYS_CLOUD_CLIENT_SECRET = '754QgUYNibFluRDaTELQ_R7UTjmiave9UBErWDMXSOE'
+const GENESYS_CLOUD_REGION = 'ap_northeast_1'
+
 // Get client credentials from environment variables
 const CLIENT_ID = GENESYS_CLOUD_CLIENT_ID;
 const CLIENT_SECRET = GENESYS_CLOUD_CLIENT_SECRET;
@@ -76,7 +81,7 @@ const ORG_REGION = GENESYS_CLOUD_REGION; // eg. us_east_1
 const environment = platformClient.PureCloudRegionHosts[ORG_REGION];
 console.log(environment)
 if(environment) client.setEnvironment(environment);
-
+console.log('client', client.loginClientCredentialsGrant)
 client
 	.loginClientCredentialsGrant(CLIENT_ID, CLIENT_SECRET)
 	.then(() => {
